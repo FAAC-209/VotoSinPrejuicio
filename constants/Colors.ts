@@ -1,26 +1,36 @@
 /**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
+ * Colores del tema de la aplicación Voto Sin Prejuicio
+ * Sistema de colores para consistencia visual en modo claro y oscuro
  */
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+const tintColorLight = '#4A90E2'; // Azul democrático
+const tintColorDark = '#3A7BC8'; // Azul democrático oscuro
 
 export const Colors = {
   light: {
-    text: '#11181C',
-    background: '#fff',
+    text: '#333333',
+    background: '#FFFFFF',
     tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
+    icon: '#555555',
+    tabIconDefault: '#888888',
     tabIconSelected: tintColorLight,
+    cardBackground: 'rgba(250, 250, 250, 0.9)',
+    cardBorder: '#E0E0E0',
+    buttonPrimary: '#4A90E2',
+    buttonSecondary: '#E74C3C',
+    stepNumber: '#4A90E2',
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
+    text: '#F5F5F5',
+    background: '#1A1A1A',
     tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
+    icon: '#AAAAAA',
+    tabIconDefault: '#888888',
     tabIconSelected: tintColorDark,
+    cardBackground: 'rgba(30, 30, 30, 0.8)',
+    cardBorder: '#333333',
+    buttonPrimary: '#3A7BC8',
+    buttonSecondary: '#C0392B',
+    stepNumber: '#3A7BC8',
   },
 };

@@ -1,110 +1,161 @@
 import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import { Collapsible } from '@/components/Collapsible';
 import { ExternalLink } from '@/components/ExternalLink';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { useColorScheme } from '@/hooks/useColorScheme';
 import { IconSymbol } from '@/components/ui/IconSymbol';
+import { Colors } from '@/constants/Colors';
 
 export default function TabTwoScreen() {
+  const colorScheme = useColorScheme();
+  const isDark = colorScheme === 'dark';
+  const colors = Colors[colorScheme ?? 'light'];
+  
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
+      headerBackgroundColor={{ light: '#4A90E2', dark: '#2C3E50' }}
       headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
-        />
+        <LinearGradient
+          colors={isDark ? ['#2C3E50', '#1A1A1A'] : ['#4A90E2', '#87CEEB']}
+          style={styles.headerGradient}
+        >
+          <View style={styles.headerImageContainer}>
+            <IconSymbol
+              size={150}
+              color={isDark ? "#FFFFFF" : "#FFFFFF"}
+              name="chart.pie.fill"
+              style={styles.headerIcon}
+            />
+          </View>
+        </LinearGradient>
       }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
+      <ThemedView style={styles.container}>
+        <View style={styles.titleContainer}>
+          <ThemedText type="title" style={styles.title}>Resultados</ThemedText>
+          <ThemedText style={styles.subtitle}>Análisis de tus preferencias políticas</ThemedText>
+        </View>
+        
+        <ThemedView style={styles.cardContainer}>
+          <ThemedText type="subtitle">Tu perfil político</ThemedText>
+          <ThemedText style={styles.paragraph}>
+            Aquí podrás ver los resultados de tu cuestionario y descubrir tu posición
+            en el espectro político.
           </ThemedText>
+        </ThemedView>
+        
+      <Collapsible title="Espectro político">
+        <ThemedText style={styles.paragraph}>
+          El espectro político es una representación de diferentes posiciones ideológicas
+          que ayuda a entender dónde se sitúan las diferentes posturas políticas.
         </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
+        <ExternalLink href="https://es.wikipedia.org/wiki/Espectro_político">
+          <ThemedText type="link">Más información</ThemedText>
         </ExternalLink>
       </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
+      
+      <Collapsible title="Progresismo vs. Conservadurismo">
+        <ThemedText style={styles.paragraph}>
+          Este eje representa las actitudes hacia el cambio social y cultural.
+          El progresismo favorece reformas sociales y cambios en las tradiciones,
+          mientras que el conservadurismo tiende a preservar las instituciones y valores tradicionales.
         </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
+      </Collapsible>
+      <Collapsible title="Liberalismo vs. Estatismo económico">
+        <ThemedText style={styles.paragraph}>
+          Este eje representa las posturas sobre el papel del Estado en la economía.
+          El liberalismo económico favorece el libre mercado con mínima intervención estatal,
+          mientras que las posturas más estatistas defienden mayor regulación y
+          presencia del Estado en asuntos económicos.
+        </ThemedText>
+        <ExternalLink href="https://es.wikipedia.org/wiki/Liberalismo_económico">
+          <ThemedText type="link">Más información</ThemedText>
         </ExternalLink>
       </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText>{' '}
-          library to create a waving hand animation.
+      
+      <Collapsible title="Nacionalismo vs. Globalismo">
+        <ThemedText style={styles.paragraph}>
+          Este eje representa las posturas sobre la soberanía nacional frente a la 
+          integración internacional. El nacionalismo prioriza la identidad, cultura e 
+          intereses nacionales, mientras que el globalismo favorece la cooperación 
+          internacional y la integración supranacional.
         </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
+        <ExternalLink href="https://es.wikipedia.org/wiki/Nacionalismo">
+          <ThemedText type="link">Más información</ThemedText>
+        </ExternalLink>
+      </Collapsible>
+      
+      <Collapsible title="Interpretar tus resultados">
+        <ThemedText style={styles.paragraph}>
+          Recuerda que estos resultados son orientativos y que las posturas políticas
+          son mucho más complejas que simples etiquetas. El objetivo de esta app
+          es ayudarte a reflexionar sobre tus propias ideas sin prejuicios ideológicos.
+        </ThemedText>
+        <ThemedText style={styles.paragraph}>
+          Pronto aquí podrás ver gráficos que representarán de forma visual 
+          tus preferencias y cómo se comparan con las propuestas de diferentes 
+          partidos políticos y candidatos.
+        </ThemedText>
       </Collapsible>
     </ParallaxScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
+  container: {
+    flex: 1,
+    padding: 10,
+  },
+  headerGradient: {
+    width: '100%',
+    height: '100%',
     position: 'absolute',
   },
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
+  headerImageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
+  headerIcon: {
+    opacity: 0.9,
+  },
+  titleContainer: {
+    alignItems: 'center',
+    marginVertical: 20,
+    paddingHorizontal: 10,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 10,
+    fontStyle: 'italic',
+  },
+  cardContainer: {
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: 12,
+    padding: 20,
+    marginVertical: 10,
+    borderWidth: 1,
+    borderColor: 'rgba(200, 200, 200, 0.3)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  paragraph: {
+    fontSize: 16,
+    lineHeight: 24,
+    marginTop: 10,
+  }
 });
