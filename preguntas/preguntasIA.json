@@ -1,0 +1,408 @@
+[
+  {
+    "id": "P01",
+    "texto": "¿Qué tan importante es para ti el tema de la educación pública?",
+    "categoria": "Educación",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P02",
+    "texto": "¿Estás a favor de aumentar el presupuesto para el sistema de salud?",
+    "categoria": "Salud",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P03",
+    "texto": "¿Cuál debería ser la prioridad en seguridad pública?",
+    "categoria": "Seguridad",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P04",
+    "texto": "¿Apoyas programas de ayuda económica a desempleados?",
+    "categoria": "Economía",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P05",
+    "texto": "¿Debería el gobierno invertir más en energías limpias?",
+    "categoria": "Medio ambiente",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P06",
+    "texto": "¿Estás a favor de legalizar el uso recreativo de la marihuana?",
+    "categoria": "Derechos y libertades",
+    "tipo": "si/no",
+    "opciones": ["Sí", "No", "Indiferente"]
+  },
+  {
+    "id": "P07",
+    "texto": "¿Apoyas la transparencia obligatoria para funcionarios públicos?",
+    "categoria": "Transparencia",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P08",
+    "texto": "¿Consideras importante proteger los derechos de la comunidad LGBTQ+?",
+    "categoria": "Derechos y libertades",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P09",
+    "texto": "¿Debe garantizarse la educación sexual en escuelas?",
+    "categoria": "Educación",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P10",
+    "texto": "¿Reducirías el gasto militar para favorecer programas sociales?",
+    "categoria": "Economía",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P11",
+    "texto": "¿El Estado debería intervenir más en la economía?",
+    "categoria": "Economía",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P12",
+    "texto": "¿Qué tan importante es el cambio climático en tus decisiones políticas?",
+    "categoria": "Medio ambiente",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P13",
+    "texto": "¿Estás de acuerdo con subir el salario mínimo?",
+    "categoria": "Economía",
+    "tipo": "si/no",
+    "opciones": ["Sí", "No", "Indiferente"]
+  },
+  {
+    "id": "P14",
+    "texto": "¿Consideras prioritario mejorar el transporte público?",
+    "categoria": "Economía",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P15",
+    "texto": "¿Debe garantizarse acceso gratuito a internet en zonas marginadas?",
+    "categoria": "Derechos y libertades",
+    "tipo": "si/no",
+    "opciones": ["Sí", "No", "Indiferente"]
+  },
+  {
+    "id": "P16",
+    "texto": "¿Te parece justo subir impuestos a grandes empresas?",
+    "categoria": "Economía",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P17",
+    "texto": "¿Crees que el gobierno debe publicar en línea el uso mensual del presupuesto?",
+    "categoria": "Transparencia",
+    "tipo": "si/no",
+    "opciones": ["Sí", "No", "Indiferente"]
+  },
+  {
+    "id": "P18",
+    "texto": "¿Qué tanto influye el medio ambiente en tu decisión de voto?",
+    "categoria": "Medio ambiente",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P19",
+    "texto": "¿Apoyas mecanismos ciudadanos de vigilancia del poder público?",
+    "categoria": "Transparencia",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P20",
+    "texto": "¿Qué tan relevante es para ti que un candidato proponga acciones contra la corrupción?",
+    "categoria": "Transparencia",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P21",
+    "texto": "¿Qué prioridad debe tener la calidad educativa frente a la cobertura universal?",
+    "categoria": "Educación",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P22",
+    "texto": "¿Debe el gobierno federal respetar la autonomía universitaria?",
+    "categoria": "Educación",
+    "tipo": "si/no",
+    "opciones": ["Sí", "No", "Indiferente"]
+  },
+  {
+    "id": "P23",
+    "texto": "¿Apoyas más inversión en infraestructura escolar o en becas estudiantiles?",
+    "categoria": "Educación",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P24",
+    "texto": "¿Estás a favor de evaluaciones periódicas a docentes?",
+    "categoria": "Educación",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P25",
+    "texto": "¿La prioridad del sistema de salud debe ser la prevención o el tratamiento de enfermedades?",
+    "categoria": "Salud",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P26",
+    "texto": "¿Debe fortalecerse principalmente el sistema de salud público, incluso limitando el sector privado?",
+    "categoria": "Salud",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P27",
+    "texto": "¿Debe el Estado garantizar el acceso gratuito a medicamentos esenciales?",
+    "categoria": "Salud",
+    "tipo": "si/no",
+    "opciones": ["Sí", "No", "Indiferente"]
+  },
+  {
+    "id": "P28",
+    "texto": "¿Consideras que la salud mental debe ser una prioridad en las políticas públicas de salud?",
+    "categoria": "Salud",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P29",
+    "texto": "¿Se debería dar un mayor rol a las fuerzas armadas o a las policías civiles en tareas de seguridad interna?",
+    "categoria": "Seguridad",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P30",
+    "texto": "¿Debe priorizarse la readaptación social de delincuentes o el castigo?",
+    "categoria": "Seguridad",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P31",
+    "texto": "¿Cómo calificarías la importancia de combatir los delitos menores (robo, vandalismo)?",
+    "categoria": "Seguridad",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P32",
+    "texto": "¿Debe el gobierno implementar sistemas que faciliten la denuncia ciudadana de forma anónima?",
+    "categoria": "Seguridad",
+    "tipo": "si/no",
+    "opciones": ["Sí", "No", "Indiferente"]
+  },
+  {
+    "id": "P33",
+    "texto": "¿Qué tan de acuerdo estás con aumentar o crear nuevos impuestos para financiar programas sociales?",
+    "categoria": "Economía",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P34",
+    "texto": "¿Consideras preocupante el nivel de la deuda pública nacional?",
+    "categoria": "Economía",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P35",
+    "texto": "¿Debe el gobierno dar prioridad al apoyo de pequeñas y medianas empresas (PyMEs)?",
+    "categoria": "Economía",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P36",
+    "texto": "¿Estás a favor de promover acuerdos de libre comercio internacional?",
+    "categoria": "Economía",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P37",
+    "texto": "¿Debe el gobierno promover activamente la inversión extranjera?",
+    "categoria": "Economía",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P38",
+    "texto": "¿Se deben endurecer las regulaciones ambientales para las industrias?",
+    "categoria": "Medio ambiente",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P39",
+    "texto": "¿Debe aumentar la inversión para la conservación y protección de áreas naturales?",
+    "categoria": "Medio ambiente",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P40",
+    "texto": "¿Apoyas incentivos fiscales para empresas que adopten prácticas sostenibles?",
+    "categoria": "Medio ambiente",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P41",
+    "texto": "¿Consideras que la libertad de expresión en redes sociales debe tener mayores regulaciones?",
+    "categoria": "Derechos y libertades",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P42",
+    "texto": "¿Debe el gobierno implementar políticas activas para proteger los derechos de comunidades indígenas?",
+    "categoria": "Derechos y libertades",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P43",
+    "texto": "¿Qué tan importante es para ti la protección de tus datos personales por parte del gobierno?",
+    "categoria": "Derechos y libertades",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P44",
+    "texto": "¿Consideras que toda información relacionada con el gasto público debe ser accesible para los ciudadanos?",
+    "categoria": "Transparencia",
+    "tipo": "si/no",
+    "opciones": ["Sí", "No", "Indiferente"]
+  },
+  {
+    "id": "P45",
+    "texto": "¿Debe haber mayor transparencia en el financiamiento de los partidos políticos?",
+    "categoria": "Transparencia",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P46",
+    "texto": "¿Estás de acuerdo con mecanismos que faciliten la rendición de cuentas de funcionarios públicos?",
+    "categoria": "Transparencia",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P47",
+    "texto": "¿Consideras que el Poder Judicial en México es suficientemente independiente del poder ejecutivo?",
+    "categoria": "Justicia/Estado de Derecho",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P48",
+    "texto": "¿Debería el gobierno simplificar los trámites legales y burocráticos?",
+    "categoria": "Justicia/Estado de Derecho",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P49",
+    "texto": "¿Debe el Estado garantizar el acceso a asistencia legal gratuita para personas de bajos recursos?",
+    "categoria": "Justicia/Estado de Derecho",
+    "tipo": "si/no",
+    "opciones": ["Sí", "No", "Indiferente"]
+  },
+  {
+    "id": "P50",
+    "texto": "¿Es prioritario para el país invertir en grandes proyectos de infraestructura (carreteras, aeropuertos, etc.)?",
+    "categoria": "Infraestructura",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P51",
+    "texto": "¿Debe priorizarse la inversión en infraestructura en zonas rurales o urbanas?",
+    "categoria": "Infraestructura",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+    {
+    "id": "P52",
+    "texto": "¿El gobierno debe enfocar sus esfuerzos en combatir la pobreza extrema?",
+    "categoria": "Desarrollo Social",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P53",
+    "texto": "¿Apoyas los programas sociales directos para adultos mayores y personas con discapacidad?",
+    "categoria": "Desarrollo Social",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P54",
+    "texto": "¿Debe el gobierno impulsar programas para facilitar el acceso a vivienda digna y asequible?",
+    "categoria": "Desarrollo Social",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+    {
+    "id": "P55",
+    "texto": "¿Cómo calificarías la importancia de las relaciones diplomáticas con Estados Unidos para México?",
+    "categoria": "Política Exterior",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P56",
+    "texto": "¿Debe el gobierno implementar políticas más estrictas o más flexibles hacia los migrantes que transitan por México?",
+    "categoria": "Política Exterior",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+  {
+    "id": "P57",
+    "texto": "¿Consideras que la inversión en ciencia, tecnología e innovación debe ser una prioridad nacional?",
+    "categoria": "Ciencia y Tecnología",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  },
+    {
+    "id": "P58",
+    "texto": "¿Debe el gobierno aumentar el apoyo financiero a proyectos culturales y artísticos?",
+    "categoria": "Cultura",
+    "tipo": "likert",
+    "opciones": ["Muy de acuerdo", "De acuerdo", "Neutral", "En desacuerdo", "Muy en desacuerdo"]
+  }
+]
