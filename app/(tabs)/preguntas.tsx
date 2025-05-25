@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
-import { ActivityIndicator, TouchableOpacity, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Image } from 'expo-image';
+import React, { useState } from 'react';
+import { ActivityIndicator, ScrollView, TouchableOpacity, View } from 'react-native'; // Quitar Modal, añadir ScrollView si es necesario para resultados
 
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
-import { Pregunta, usePreguntasData } from '@/hooks/usePreguntasData';
-import { useThemeColor } from '@/hooks/useThemeColor';
-import { useColorScheme } from '@/hooks/useColorScheme';
 import { Colors } from '@/constants/Colors';
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { AfinidadResultado, Pregunta, usePreguntasData } from '@/hooks/usePreguntasData'; // Importar AfinidadResultado
+import { useThemeColor } from '@/hooks/useThemeColor';
 import { styles } from './preguntas-styles';
 
 // Componente para mostrar una pregunta individual
@@ -45,9 +44,12 @@ const PreguntaItem = ({ pregunta, onSelectOpcion, respuestaSeleccionada }: {
             key={index}
             style={[
               styles.opcion,
-              { backgroundColor: respuestaSeleccionada === opcion 
-                ? tintColor 
-                : isDarkMode ? '#444654' : '#F7F7F8' 
+              {
+                backgroundColor: respuestaSeleccionada === opcion
+                  ? tintColor
+                  : (isDarkMode ? '#606060' : '#3A7BC8'), // Mantener colores actuales para no seleccionadas
+                borderWidth: respuestaSeleccionada === opcion ? 2 : 0,
+                borderColor: respuestaSeleccionada === opcion ? textColor : 'transparent',
               },
             ]}
             onPress={() => {
@@ -55,8 +57,11 @@ const PreguntaItem = ({ pregunta, onSelectOpcion, respuestaSeleccionada }: {
             }}
           >
             <ThemedText style={[
-              styles.opcionTexto, 
-              { color: respuestaSeleccionada === opcion ? '#ffffff' : textColor }
+              styles.opcionTexto,
+              {
+                color: respuestaSeleccionada === opcion ? '#FFFFFF' : textColor,
+                fontWeight: respuestaSeleccionada === opcion ? 'bold' : styles.opcionTexto?.fontWeight,
+              }
             ]}>
               {opcion}
             </ThemedText>
@@ -68,30 +73,38 @@ const PreguntaItem = ({ pregunta, onSelectOpcion, respuestaSeleccionada }: {
 };
 
 export default function PreguntasScreen() {
-  const { preguntas, isLoaded } = usePreguntasData();
+  const { preguntas, partidos, isLoaded, calcularAfinidad } = usePreguntasData();
   const [respuestas, setRespuestas] = useState<Record<string, string>>({});
-  // Asegurarnos de llamar a todos los hooks de forma incondicional
   const tintColor = useThemeColor({}, 'tint');
   const backgroundColor = useThemeColor({}, 'background');
   const textColor = useThemeColor({}, 'text');
   
-  // Estado para controlar la pregunta actual
   const [preguntaActualIndex, setPreguntaActualIndex] = useState(0);
+  const [mostrarResultados, setMostrarResultados] = useState(false);
+  const [resultadosAfinidad, setResultadosAfinidad] = useState<AfinidadResultado[]>([]);
+  // const [modalVisible, setModalVisible] = useState(false); // Eliminado
   
   const handleSelectOpcion = (id: string, opcion: string) => {
-    setRespuestas(prev => ({
-      ...prev,
-      [id]: opcion
-    }));
+    setRespuestas(prevRespuestas => {
+      const nuevasRespuestas = {
+        ...prevRespuestas,
+        [id]: opcion
+      };
+
+      // Después de actualizar la respuesta, decidir si avanzar o mostrar resultados
+      if (preguntaActualIndex < preguntas.length - 1) {
+        setPreguntaActualIndex(preguntaActualIndex + 1);
+      } else {
+        // Es la última pregunta, calcular y mostrar resultados
+        const resultados = calcularAfinidad(nuevasRespuestas, preguntas, partidos);
+        setResultadosAfinidad(resultados);
+        setMostrarResultados(true);
+      }
+      return nuevasRespuestas; // Devuelve el nuevo estado para setRespuestas
+    });
   };
   
   // Funciones para navegar entre preguntas
-  const irSiguientePregunta = () => {
-    if (preguntaActualIndex < preguntas.length - 1) {
-      setPreguntaActualIndex(preguntaActualIndex + 1);
-    }
-  };
-  
   const irPreguntaAnterior = () => {
     if (preguntaActualIndex > 0) {
       setPreguntaActualIndex(preguntaActualIndex - 1);
@@ -100,6 +113,14 @@ export default function PreguntasScreen() {
   const colorScheme = useColorScheme();
   const isDark = colorScheme === 'dark';
   const colors = Colors[colorScheme ?? 'light'];
+
+  const reiniciarCuestionario = () => {
+    setRespuestas({});
+    setPreguntaActualIndex(0);
+    setMostrarResultados(false);
+    setResultadosAfinidad([]);
+    // setModalVisible(false); // Eliminado
+  };
   
   return (
     <ParallaxScrollView
@@ -118,111 +139,154 @@ export default function PreguntasScreen() {
             />
           </View>
         </LinearGradient>
-      }>      <ThemedView style={styles.container}>
-        <View style={styles.titleContainer}>
-          <ThemedText type="title" style={styles.title}>Cuestionario</ThemedText>
-          <ThemedText style={styles.subtitle}>Descubre tus preferencias políticas</ThemedText>
-        </View>
-        
-        <ThemedView style={styles.instructionCard}>
-          <ThemedText type="subtitle">Instrucciones</ThemedText>
-          <ThemedText style={styles.paragraph}>
-            Responde con sinceridad a cada pregunta seleccionando la opción
-            que mejor represente tu opinión personal. No hay respuestas correctas o incorrectas.
-          </ThemedText>
-        </ThemedView>
-
+      }>      
+      {/* Contenido principal: Preguntas o Resultados */}
       {!isLoaded ? (
         <ThemedView style={styles.loadingContainer}>
           <ActivityIndicator size="large" color={tintColor} />
-          <ThemedText>Cargando preguntas...</ThemedText>
+          <ThemedText>Cargando...</ThemedText>
+        </ThemedView>
+      ) : mostrarResultados ? (
+        // Vista de Resultados
+        <ThemedView style={[styles.container, styles.resultadosViewContainer]}>
+          <ThemedText type="title" style={styles.resultadosTitle}>Resultados de Afinidad</ThemedText>
+          <ScrollView contentContainerStyle={{paddingBottom: 20}}>
+            {resultadosAfinidad.length > 0 ? (
+              resultadosAfinidad.map((partido) => (
+                <ThemedView key={partido.id} style={[styles.resultadoItemContainer, {backgroundColor: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)'}]}>
+                  <ThemedText style={styles.resultadoPartidoNombre}>{partido.partido}:</ThemedText>
+                  <ThemedText style={[styles.resultadoAfinidad, {color: tintColor}]}>{partido.afinidad}%</ThemedText>
+                </ThemedView>
+              ))
+            ) : (
+              <ThemedText style={{textAlign: 'center', marginTop: 20}}>Calculando resultados...</ThemedText>
+            )}
+            {resultadosAfinidad.length > 0 && (
+              <ThemedText style={styles.partidoMasAfin}>
+                El partido más afín es: <ThemedText style={{fontWeight: 'bold', color: tintColor}}>{resultadosAfinidad[0].partido}</ThemedText> con {resultadosAfinidad[0].afinidad}%.
+              </ThemedText>
+            )}
+          </ScrollView>
+          <TouchableOpacity
+            style={[styles.navButton, {backgroundColor: tintColor, marginTop: 20, alignSelf: 'center'}] } // Reutilizando estilo navButton
+            onPress={reiniciarCuestionario}
+          >
+            <ThemedText style={styles.navButtonText}>Volver a Empezar</ThemedText>
+          </TouchableOpacity>
         </ThemedView>
       ) : (
+        // Vista de Preguntas
         <>
           {preguntas.length > 0 ? (
-            <>              {/* Mostrar indicador de progreso estilo ChatGPT */}
-              <ThemedView style={styles.progressContainer}>
-                <ThemedView style={styles.progressHeader}>
-                  <IconSymbol 
-                    size={18} 
-                    name="chart.bar.fill" 
-                    color={tintColor} 
-                    style={{ marginRight: 8 }}
-                  />
-                  <ThemedText style={styles.progressText}>
-                    Pregunta {preguntaActualIndex + 1} de {preguntas.length}
+            <>
+              <ThemedView style={styles.container}> {/* Contenedor para el título y la tarjeta de instrucciones */}
+                <View style={styles.titleContainer}>
+                  <ThemedText type="title" style={styles.title}>Cuestionario</ThemedText>
+                  <ThemedText style={styles.subtitle}>Descubre tus preferencias políticas</ThemedText>
+                </View>
+                <ThemedView style={styles.instructionCard}>
+                  <ThemedText type="subtitle">Instrucciones</ThemedText>
+                  <ThemedText style={styles.paragraph}>
+                    Responde con sinceridad a cada pregunta seleccionando la opción
+                    que mejor represente tu opinión personal. No hay respuestas correctas o incorrectas.
                   </ThemedText>
                 </ThemedView>
-                <ThemedView style={styles.progressBar}>
-                  <ThemedView 
-                    style={[
-                      styles.progressFill, 
-                      { 
-                        width: `${((preguntaActualIndex + 1) / preguntas.length) * 100}%`,
-                        backgroundColor: tintColor 
-                      }
-                    ]} 
-                  />
-                </ThemedView>
               </ThemedView>
+
+              {/* Contenedor para el progreso, la pregunta y la navegación, que debe estar dentro del ParallaxScrollView pero fuera del ThemedView anterior si queremos que todo scrollee junto con Parallax */}
+              {/* O bien, si queremos que el título y las instrucciones sean parte del header del Parallax, la estructura debe cambiar */}
+              {/* Por ahora, asumimos que todo el contenido de preguntas va junto y scrollea */}
+              {/* Se quita flex:1 de este contenedor para mejorar el scroll en web, manteniendo el padding */}
+              <ThemedView style={{ padding: 10 }}> 
+                <ThemedView style={styles.progressContainer}>
+                  <ThemedView style={styles.progressHeader}>
+                    <IconSymbol 
+                      size={18} 
+                      name="chart.bar.fill" 
+                      color={tintColor} 
+                      style={{ marginRight: 8 }}
+                    />
+                    <ThemedText style={styles.progressText}>
+                      Pregunta {preguntaActualIndex + 1} de {preguntas.length}
+                    </ThemedText>
+                  </ThemedView>
+                  <ThemedView style={styles.progressBar}>
+                    <ThemedView 
+                      style={[
+                        styles.progressFill, 
+                        { 
+                          width: `${((preguntaActualIndex + 1) / preguntas.length) * 100}%`,
+                          backgroundColor: tintColor 
+                        }
+                      ]} 
+                    />
+                  </ThemedView>
+                </ThemedView>
               
-              {/* Mostrar la pregunta actual */}
-              <PreguntaItem 
-                key={preguntas[preguntaActualIndex].id} 
-                pregunta={preguntas[preguntaActualIndex]} 
-                onSelectOpcion={handleSelectOpcion}
-                respuestaSeleccionada={respuestas[preguntas[preguntaActualIndex].id]} 
-              />
-                {/* Botones de navegación estilo ChatGPT */}
-              <ThemedView style={styles.navigationButtons}>
-                <TouchableOpacity 
-                  style={[
-                    styles.navButton,
-                    preguntaActualIndex === 0 ? styles.disabledButton : null,
-                    { flexDirection: 'row', alignItems: 'center' }
-                  ]}
-                  disabled={preguntaActualIndex === 0}
-                  onPress={irPreguntaAnterior}
-                >
-                  <IconSymbol 
-                    size={20} 
-                    name="chevron.left" 
-                    color={preguntaActualIndex === 0 ? '#999' : '#fff'} 
-                    style={{ marginRight: 8 }}
-                  />
-                  <ThemedText style={styles.navButtonText}>Anterior</ThemedText>
-                </TouchableOpacity>
+                <PreguntaItem 
+                  key={preguntas[preguntaActualIndex].id} 
+                  pregunta={preguntas[preguntaActualIndex]} 
+                  onSelectOpcion={handleSelectOpcion}
+                  respuestaSeleccionada={respuestas[preguntas[preguntaActualIndex].id]} 
+                />
                 
-                <TouchableOpacity 
-                  style={[
-                    styles.navButton,
-                    preguntaActualIndex === preguntas.length - 1 ? styles.disabledButton : null,
-                    { flexDirection: 'row', alignItems: 'center' }
-                  ]}
-                  disabled={preguntaActualIndex === preguntas.length - 1}
-                  onPress={irSiguientePregunta}
-                >
-                  <ThemedText style={styles.navButtonText}>Siguiente</ThemedText>
-                  <IconSymbol 
-                    size={20} 
-                    name="chevron.right" 
-                    color={preguntaActualIndex === preguntas.length - 1 ? '#999' : '#fff'} 
-                    style={{ marginLeft: 8 }}
-                  />
-                </TouchableOpacity>
-              </ThemedView>
-                {/* Contador de respuestas estilo ChatGPT */}
-              <ThemedView style={styles.contadorContainer}>
-                <ThemedView style={styles.contadorBadge}>
-                  <IconSymbol 
-                    size={16} 
-                    name="checkmark.circle.fill" 
-                    color="#FFFFFF"
-                    style={{ marginRight: 6 }} 
-                  />
-                  <ThemedText style={styles.contadorText}>
-                    {Object.keys(respuestas).length} de {preguntas.length} preguntas respondidas
-                  </ThemedText>
+                <ThemedView style={styles.navigationButtons}>
+                  <TouchableOpacity 
+                    style={[
+                      styles.navButton,
+                      preguntaActualIndex === 0 ? styles.disabledButton : null,
+                      { flexDirection: 'row', alignItems: 'center' }
+                    ]}
+                    disabled={preguntaActualIndex === 0}
+                    onPress={irPreguntaAnterior}
+                  >
+                    <IconSymbol 
+                      size={20} 
+                      name="chevron.left" 
+                      color={preguntaActualIndex === 0 ? (isDark ? '#777' : '#aaa') : (isDark ? '#fff' : '#fff')} 
+                      style={{ marginRight: 8 }}
+                    />
+                    <ThemedText style={[styles.navButtonText, preguntaActualIndex === 0 ? {color: (isDark ? '#777' : '#aaa')} : {}]}>Anterior</ThemedText>
+                  </TouchableOpacity>
+                  
+                  {/* Botón Siguiente Opcional - Se podría añadir si se desea permitir avanzar sin responder, 
+                      pero la lógica actual avanza al seleccionar una opción. 
+                      Si se re-introduce, asegurarse que handleSelectOpcion no cause doble avance. 
+                      Por ahora, lo mantenemos comentado para seguir la funcionalidad de avance automático al seleccionar.
+                  */}
+                  {/*
+                  {preguntaActualIndex < preguntas.length - 1 && (
+                    <TouchableOpacity 
+                      style={[
+                        styles.navButton,
+                        { flexDirection: 'row', alignItems: 'center' }
+                      ]}
+                      onPress={() => setPreguntaActualIndex(preguntaActualIndex + 1)} // Lógica simple de avance
+                    >
+                      <ThemedText style={styles.navButtonText}>Siguiente</ThemedText>
+                      <IconSymbol 
+                        size={20} 
+                        name="chevron.right" 
+                        color={isDark ? '#fff' : '#fff'} 
+                        style={{ marginLeft: 8 }}
+                      />
+                    </TouchableOpacity>
+                  )}
+                  */}
+                </ThemedView>
+                
+                <ThemedView style={styles.contadorContainer}>
+                  <ThemedView style={styles.contadorBadge}>
+                    <IconSymbol 
+                      size={16} 
+                      name="checkmark.circle.fill" 
+                      color="#FFFFFF"
+                      style={{ marginRight: 6 }} 
+                    />
+                    <ThemedText style={styles.contadorText}>
+                      {Object.keys(respuestas).length} de {preguntas.length} preguntas respondidas
+                    </ThemedText>
+                  </ThemedView>
                 </ThemedView>
               </ThemedView>
             </>
@@ -233,6 +297,7 @@ export default function PreguntasScreen() {
           )}
         </>
       )}
+      {/* Modal eliminado */}
     </ParallaxScrollView>
   );
 }
@@ -373,5 +438,50 @@ const oldStyles = {
     color: 'white',
     fontWeight: 'bold',
     fontSize: 15,
+  },
+  resultadosViewContainer: {
+    padding: 16,
+    paddingBottom: 24,
+    backgroundColor: 'transparent',
+  },
+  resultadosTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  resultadoItemContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    marginBottom: 12,
+  },
+  resultadoPartidoNombre: {
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  resultadoAfinidad: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  partidoMasAfin: {
+    marginTop: 12,
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  buttonClose: {
+    marginTop: 20,
+    borderRadius: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    alignItems: 'center',
+  },
+  textStyleButton: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 };

@@ -1,13 +1,12 @@
-import { Image } from 'expo-image';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { useColorScheme } from '@/hooks/useColorScheme';
 import { Colors } from '@/constants/Colors';
+import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -28,11 +27,11 @@ export default function HomeScreen() {
           style={styles.headerGradient}
         >
           <View style={styles.headerImageContainer}>
-            <Image
+            {/* <Image
               source={require('@/assets/images/vote-header.png')}
               style={styles.headerImage}
               contentFit="contain"
-            />
+            /> */}
           </View>
         </LinearGradient>
       }>

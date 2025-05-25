@@ -1,15 +1,14 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { StyleSheet, View } from 'react-native';
 
 import { Collapsible } from '@/components/Collapsible';
 import { ExternalLink } from '@/components/ExternalLink';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { useColorScheme } from '@/hooks/useColorScheme';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import { Colors } from '@/constants/Colors';
+import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function TabTwoScreen() {
   const colorScheme = useColorScheme();
@@ -101,6 +100,7 @@ export default function TabTwoScreen() {
           partidos políticos y candidatos.
         </ThemedText>
       </Collapsible>
+    </ThemedView>
     </ParallaxScrollView>
   );
 }

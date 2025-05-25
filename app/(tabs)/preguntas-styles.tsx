@@ -172,7 +172,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 8,
-    backgroundColor: '#4A90E2',
+    backgroundColor: '#333333', // Gris oscuro para botones activos
     minWidth: 120,
     alignItems: 'center',
     justifyContent: 'center',
@@ -183,12 +183,150 @@ export const styles = StyleSheet.create({
     elevation: 3,
   },
   disabledButton: {
-    backgroundColor: 'rgba(74, 144, 226, 0.5)',
+    backgroundColor: '#555555', // Gris un poco más claro o con más transparencia para deshabilitados
     opacity: 0.7,
   },
   navButtonText: {
     color: 'white',
     fontWeight: 'bold',
     fontSize: 15,
+  },
+  // Estilos para el Modal de Resultados
+  modalCenteredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)', // Fondo semitransparente
+  },
+  modalView: {
+    margin: 20,
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    width: '90%',
+    maxWidth: 400,
+  },
+  modalTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  resultadoItemContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    paddingVertical: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee', // Un color claro para el separador
+  },
+  resultadoPartidoNombre: {
+    fontSize: 17,
+    fontWeight: '500',
+  },
+  resultadoAfinidad: {
+    fontSize: 17,
+    fontWeight: 'bold',
+  },
+  partidoMasAfin: {
+    marginTop: 25,
+    fontSize: 16,
+    textAlign: 'center',
+    lineHeight: 24,
+  },
+  buttonClose: {
+    borderRadius: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    elevation: 2,
+    marginTop: 25,
+  },
+  textStyleButton: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 16,
+  },
+  // Nuevos estilos para la vista de resultados directos
+  resultadosViewContainer: {
+    marginTop: 20,
+    marginBottom: 20,
+    padding: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.08)', // Un fondo sutil
+    borderRadius: 15,
+    borderWidth: 1,
+    borderColor: 'rgba(200, 200, 200, 0.25)',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 4,
+  },
+  resultadosTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  resultadosSubTitle: {
+    fontSize: 18,
+    textAlign: 'center',
+    marginBottom: 20,
+    fontStyle: 'italic',
+    opacity: 0.9,
+  },
+  resultadoIndividualContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(200, 200, 200, 0.15)', // Separador más sutil
+  },
+  resultadoPartido: {
+    fontSize: 18,
+    fontWeight: '500',
+  },
+  resultadoPorcentaje: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  agradecimientoText: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginTop: 25,
+    marginBottom: 15,
+    lineHeight: 24,
+  },
+  reiniciarButton: { // Estilo similar a navButton pero podría ser diferente si se desea
+    paddingVertical: 14,
+    paddingHorizontal: 25,
+    borderRadius: 10,
+    backgroundColor: '#4A90E2', // Un color distintivo para reiniciar
+    minWidth: 180,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10, // Espacio antes del botón de reiniciar
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+  reiniciarButtonText: { // Estilo similar a navButtonText
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 });
